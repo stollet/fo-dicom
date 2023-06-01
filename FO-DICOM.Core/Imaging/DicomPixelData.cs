@@ -483,8 +483,14 @@ namespace FellowOakDicom.Imaging
                     data = new SwapByteBuffer(data, 2);
                 }
 
-                buffer.Buffers.Remove(_paddingByteBuffer);
+                int count = buffer.Buffers.Count;
+                if (count > 0 && buffer.Buffers[count - 1] == _paddingByteBuffer)
+                {
+                    buffer.Buffers.RemoveAt(count - 1);
+                }
+
                 buffer.Buffers.Add(data);
+
                 if (buffer.Size % 2 == 1)
                 {
                     buffer.Buffers.Add(_paddingByteBuffer);
