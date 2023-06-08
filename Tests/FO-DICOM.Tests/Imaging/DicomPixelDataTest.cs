@@ -166,7 +166,35 @@ namespace FellowOakDicom.Tests.Imaging
             IImage myImg = myDicomImage.RenderImage(0);
             myImg.Render(3, true, true, 0);
         }
+        
+        [Fact]
+        public void AddFrame_ImplicitVRLittleEndian_PixelData_Length_Always_Even()
+        {
+            var dataset = new DicomDataset(DicomTransferSyntax.ImplicitVRLittleEndian);
+            dataset.Add(DicomTag.BitsAllocated, (ushort)8);
+            var pixelData = DicomPixelData.Create(dataset, true);
 
+            Assert.Equal("OtherWordPixelData", pixelData.GetType().Name);
 
+            var oddPayload = new TempFileBuffer(new byte[13]);
+
+            pixelData.AddFrame(oddPayload);
+            var item = dataset.GetDicomItem<DicomOtherWord>(DicomTag.PixelData);
+
+            Assert.Equal(1, pixelData.NumberOfFrames);
+            Assert.Equal<uint>(0, item.Length % 2);
+
+            pixelData.AddFrame(oddPayload);
+            item = dataset.GetDicomItem<DicomOtherWord>(DicomTag.PixelData);
+
+            Assert.Equal(2, pixelData.NumberOfFrames);
+            Assert.Equal<uint>(0, item.Length % 2);
+
+            pixelData.AddFrame(oddPayload);
+            item = dataset.GetDicomItem<DicomOtherWord>(DicomTag.PixelData);
+
+            Assert.Equal(3, pixelData.NumberOfFrames);
+            Assert.Equal<uint>(0, item.Length % 2);
+        }
     }
 }

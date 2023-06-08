@@ -431,6 +431,7 @@ namespace FellowOakDicom.Imaging
             /// The pixel data other word (OW) element
             /// </summary>
             private readonly DicomOtherWord _element;
+            private readonly IByteBuffer _paddingByteBuffer = new MemoryByteBuffer(new[] { DicomVR.OW.PaddingValue });
 
             #endregion
 
@@ -488,7 +489,19 @@ namespace FellowOakDicom.Imaging
                     data = new SwapByteBuffer(data, 2);
                 }
 
+                int count = buffer.Buffers.Count;
+                if (count > 0 && buffer.Buffers[count - 1] == _paddingByteBuffer)
+                {
+                    buffer.Buffers.RemoveAt(count - 1);
+                }
+
                 buffer.Buffers.Add(data);
+
+                if (buffer.Size % 2 == 1)
+                {
+                    buffer.Buffers.Add(_paddingByteBuffer);
+                }
+
                 NumberOfFrames++;
             }
 
