@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network;
 using Xunit;
@@ -12,7 +13,7 @@ using Microsoft.Extensions.Logging;
 namespace FellowOakDicom.Tests.Network
 {
 
-    [Collection("Network")]
+    [Collection(TestCollections.Network)]
     public class DicomNEventReportResponseTest
     {
         #region Unit tests
@@ -104,7 +105,7 @@ namespace FellowOakDicom.Tests.Network
                 };
 
                 dicomClient.ClientOptions.AssociationLingerTimeoutInMs = (int)TimeSpan.FromMinutes(1).TotalMilliseconds;
-                await dicomClient.SendAsync().ConfigureAwait(false);
+                await dicomClient.SendAsync();
 
                 Assert.Equal(DicomStatus.Success, status);
                 Assert.Equal(2, verifiedInstances);

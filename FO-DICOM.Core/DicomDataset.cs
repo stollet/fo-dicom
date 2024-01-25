@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.IO.Buffer;
 using FellowOakDicom.StructuredReport;
@@ -16,7 +17,7 @@ namespace FellowOakDicom
     /// <summary>
     /// A collection of <see cref="DicomItem">DICOM items</see>.
     /// </summary>
-    public partial class DicomDataset : IEnumerable<DicomItem>
+    public partial class DicomDataset : IEnumerable<DicomItem>, IEquatable<DicomDataset>
     {
         #region FIELDS
 
@@ -775,6 +776,17 @@ namespace FellowOakDicom
         }
 
         /// <summary>
+        /// Adds a DICOM item to the dataset.
+        /// </summary>
+        /// <param name="item">DICOM item to add.</param>
+        /// <returns>The dataset instance.</returns>
+        /// <exception cref="System.ArgumentException">If tag of added item already exists in dataset.</exception>
+        public DicomDataset Add(DicomItem item)
+        {
+            return DoAdd(item, false);
+        }
+
+        /// <summary>
         /// Add a collection of DICOM items to the dataset.
         /// </summary>
         /// <param name="items">Collection of DICOM items to add.</param>
@@ -1500,6 +1512,43 @@ namespace FellowOakDicom
         {
             // first evaluate the encoding, and then apply
             SetTargetEncodingsToStringElements(GetEncodingsForSerialization());
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (Object.ReferenceEquals(obj, null)) return false;
+            if (Object.ReferenceEquals(this, obj)) return true;
+            if (GetType() != obj.GetType()) return false;
+            return Equals(obj as DicomDataset);
+        }
+
+        public bool Equals(DicomDataset other)
+        {
+            return new DicomDatasetComparer().Equals(this, other);
+        }
+
+        public static bool operator ==(DicomDataset a, DicomDataset b)
+        {
+            if (((object)a == null) && ((object)b == null)) return true;
+            if (((object)a == null) || ((object)b == null)) return false;
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(DicomDataset a, DicomDataset b)
+        {
+            return !(a == b);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = new HashCode();
+
+            foreach (var element in this)
+            {
+                hashCode.Add(element);
+            }
+
+            return hashCode.ToHashCode();
         }
 
         #endregion

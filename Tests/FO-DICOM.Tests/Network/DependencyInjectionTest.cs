@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.Text;
@@ -46,8 +47,8 @@ namespace FellowOakDicom.Tests.Network
                     value = resp.Dataset.GetSingleValueOrDefault(DicomTag.PatientComments, string.Empty);
                 };
 
-            await client.AddRequestAsync(request).ConfigureAwait(false);
-            await client.SendAsync().ConfigureAwait(false);
+            await client.AddRequestAsync(request);
+            await client.SendAsync();
 
             Assert.False(string.IsNullOrEmpty(value));
         }

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Imaging;
 using FellowOakDicom.Imaging.Codec;
@@ -13,7 +14,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.Imaging.Codec
 {
 
-    [Collection("WithTranscoder")]
+    [Collection(TestCollections.WithTranscoder)]
     public class DicomCodecExtensionsTest
     {
         #region Unit tests

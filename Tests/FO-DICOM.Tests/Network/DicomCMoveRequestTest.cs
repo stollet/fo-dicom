@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.Network
 {
 
-    [Collection("Network")]
+    [Collection(TestCollections.Network)]
     public class DicomCMoveRequestTest
     {
         #region Unit Tests

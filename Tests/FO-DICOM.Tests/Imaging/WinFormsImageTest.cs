@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
-
-#if NET462
+#nullable disable
 
 using System.Drawing;
 using FellowOakDicom.Imaging;
@@ -11,7 +10,7 @@ using Image = SixLabors.ImageSharp.Image;
 namespace FellowOakDicom.Tests.Imaging
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class WinFormsImageTest
     {
 #region Unit tests
@@ -115,5 +114,3 @@ namespace FellowOakDicom.Tests.Imaging
 #endregion
     }
 }
-
-#endif

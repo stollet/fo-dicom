@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ using Xunit.Abstractions;
 
 namespace FellowOakDicom.Tests.Network.Client.Advanced
 {
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class AdvancedDicomClientAssociationTests
     {
         #region Fields
@@ -375,7 +376,7 @@ namespace FellowOakDicom.Tests.Network.Client.Advanced
             using var association = await connection.OpenAssociationAsync(openAssociationRequest, cancellationToken);
             try
             {
-                cEchoResponse = await association.SendCEchoRequestAsync(cEchoRequest, cancellationToken).ConfigureAwait(false);
+                cEchoResponse = await association.SendCEchoRequestAsync(cEchoRequest, cancellationToken);
             }
             finally
             {

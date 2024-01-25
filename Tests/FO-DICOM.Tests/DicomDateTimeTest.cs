@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using Xunit;
@@ -7,7 +8,7 @@ using Xunit;
 namespace FellowOakDicom.Tests
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class DicomDateTimeTest
     {
         [Fact]
@@ -18,7 +19,7 @@ namespace FellowOakDicom.Tests
                     new DicomUniqueIdentifier(DicomTag.SOPClassUID, DicomUID.SecondaryCaptureImageStorage),
                     new DicomUniqueIdentifier(DicomTag.SOPInstanceUID, "1.2.3"),
                     new DicomDateTime(DicomTag.AcquisitionDateTime, new DateTime(2016, 4, 20, 10, 20, 30)));
-            
+
             var expected = $"20160420102030";
             var actual = dataset.GetString(DicomTag.AcquisitionDateTime);
 

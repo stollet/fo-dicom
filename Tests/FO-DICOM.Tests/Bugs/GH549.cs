@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Imaging.Codec;
 using System.Collections.Concurrent;
@@ -11,7 +12,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.Bugs
 {
 
-    [Collection("WithTranscoder")]
+    [Collection(TestCollections.WithTranscoder)]
     public class GH549
     {
         #region Unit Tests

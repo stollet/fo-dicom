@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Imaging.LUT;
 using Xunit;
@@ -9,7 +10,7 @@ namespace FellowOakDicom.Tests.Imaging.LUT
 
     #region Unit tests
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class PrecalculatedLUTTest
     {
         [Theory(DisplayName = "Issue #219 ")]

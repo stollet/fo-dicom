@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.IO.Buffer;
 using System;
@@ -11,13 +12,13 @@ namespace FellowOakDicom.Log
 
     public class DicomDatasetDumper : IDicomDatasetWalker
     {
-        private StringBuilder _log;
+        private readonly StringBuilder _log;
 
-        private int _width = 128;
+        private readonly int _width;
 
-        private int _value = 82;
+        private readonly int _value;
 
-        private int _depth = 0;
+        private int _depth;
 
         private string _pad = string.Empty;
 
@@ -43,7 +44,11 @@ namespace FellowOakDicom.Log
         public bool OnElement(DicomElement element)
         {
             var sb = new StringBuilder();
-            if (_depth > 0) sb.Append(_pad).Append("> ");
+            if (_depth > 0)
+            {
+                sb.Append(_pad).Append("> ");
+            }
+
             sb.Append(element.Tag);
             sb.Append(' ');
             sb.Append(element.ValueRepresentation.Code);
@@ -85,7 +90,11 @@ namespace FellowOakDicom.Log
                     sb.Append(val);
                 }
             }
-            while (sb.Length < _value) sb.Append(' ');
+            while (sb.Length < _value)
+            {
+                sb.Append(' ');
+            }
+
             sb.Append('#');
             string name = element.Tag.DictionaryEntry.Keyword;
             sb.AppendFormat(
@@ -101,10 +110,7 @@ namespace FellowOakDicom.Log
         /// </summary>
         /// <param name="element">Element to traverse.</param>
         /// <returns>true if traversing completed without issues, false otherwise.</returns>
-        public Task<bool> OnElementAsync(DicomElement element)
-        {
-            return Task.FromResult(OnElement(element));
-        }
+        public Task<bool> OnElementAsync(DicomElement element) => Task.FromResult(OnElement(element));
 
         /// <summary>
         /// Handler for traversing beginning of sequence.
@@ -177,29 +183,20 @@ namespace FellowOakDicom.Log
         /// </summary>
         /// <param name="item">Buffer containing the fragment item.</param>
         /// <returns>true if traversing completed without issues, false otherwise.</returns>
-        public bool OnFragmentItem(IByteBuffer item)
-        {
-            return true;
-        }
+        public bool OnFragmentItem(IByteBuffer item) => true;
 
         /// <summary>
         /// Asynchronous handler for traversing fragment item.
         /// </summary>
         /// <param name="item">Buffer containing the fragment item.</param>
         /// <returns>true if traversing completed without issues, false otherwise.</returns>
-        public Task<bool> OnFragmentItemAsync(IByteBuffer item)
-        {
-            return Task.FromResult(OnFragmentItem(item));
-        }
+        public Task<bool> OnFragmentItemAsync(IByteBuffer item) => Task.FromResult(OnFragmentItem(item));
 
         /// <summary>
         /// Handler for traversing end of fragment.
         /// </summary>
         /// <returns>true if traversing completed without issues, false otherwise.</returns>
-        public bool OnEndFragment()
-        {
-            return true;
-        }
+        public bool OnEndFragment() => true;
 
         /// <summary>
         /// Handler for end of traversal.

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ using Xunit;
 namespace FellowOakDicom.Tests
 {
 
-    [Collection("Validation")]
+    [Collection(TestCollections.Validation)]
     public class DicomFileMetaInformationTest
     {
         #region Unit tests

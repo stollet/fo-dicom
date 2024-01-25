@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using Xunit;
@@ -7,7 +8,7 @@ using Xunit;
 namespace FellowOakDicom.Tests
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class DicomDatasetExtensionsTest
     {
         #region Unit tests
@@ -146,7 +147,7 @@ namespace FellowOakDicom.Tests
                 new DicomDate(DicomTag.CreationDate, "20160524"),
                 new DicomShortString(DicomTag.TimezoneOffsetFromUTC, "-0900"),
                 new DicomSequence(DicomTag.ScheduledProcedureStepSequence, scheduledProcedure));
- 
+
             var actual = scheduledProcedure.GetDateTimeOffset(DicomTag.ScheduledProcedureStepStartDate, DicomTag.ScheduledProcedureStepStartTime, dataset);
             Assert.Equal(expected, actual);
         }

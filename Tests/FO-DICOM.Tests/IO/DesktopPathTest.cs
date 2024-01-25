@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.IO;
@@ -8,7 +9,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.IO
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class DesktopPathTest
     {
         #region Unit tests

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.IO;
@@ -12,7 +13,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.IO.Buffer
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class EvenLengthBufferTest
     {
         [Fact]
@@ -80,7 +81,7 @@ namespace FellowOakDicom.Tests.IO.Buffer
             using var ms = new MemoryStream(new byte[8]);
 
             // Act
-            await evenLengthBuffer.CopyToStreamAsync(ms, CancellationToken.None).ConfigureAwait(false);
+            await evenLengthBuffer.CopyToStreamAsync(ms, CancellationToken.None);
             var actual = ms.ToArray();
 
             // Assert

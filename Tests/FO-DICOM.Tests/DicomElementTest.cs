@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.IO.Buffer;
 using System;
@@ -13,7 +14,7 @@ using Xunit;
 namespace FellowOakDicom.Tests
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class DicomElementTest
     {
         #region Unit tests
@@ -494,6 +495,7 @@ namespace FellowOakDicom.Tests
             new object[] { DicomUID.ImplicitVRLittleEndian, DicomTransferSyntax.ImplicitVRLittleEndian },
             new object[] { DicomUID.JPEGExtended12Bit, DicomTransferSyntax.JPEGProcess2_4 },
             new object[] { DicomUID.JPEG2000Lossless, DicomTransferSyntax.JPEG2000Lossless },
+            new object[] { DicomUID.HTJ2KLossless, DicomTransferSyntax.HTJ2KLossless },
             new object[] { DicomUID.ExplicitVRBigEndianRETIRED, DicomTransferSyntax.ExplicitVRBigEndian },
             new object[] { DicomUID.GEPrivateImplicitVRBigEndian, DicomTransferSyntax.GEPrivateImplicitVRBigEndian },
             new object[] { DicomUID.MPEG2MPML, DicomTransferSyntax.MPEG2 }

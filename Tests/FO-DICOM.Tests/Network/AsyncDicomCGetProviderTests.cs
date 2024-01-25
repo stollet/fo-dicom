@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.Collections.Concurrent;
@@ -15,7 +16,7 @@ using Xunit.Abstractions;
 
 namespace FellowOakDicom.Tests.Network
 {
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class AsyncDicomCGetProviderTests
     {
         private readonly XUnitDicomLogger _logger;
@@ -48,8 +49,8 @@ namespace FellowOakDicom.Tests.Network
                     OnTimeout = (sender, args) => timeout = args
                 };
 
-                await client.AddRequestAsync(request).ConfigureAwait(false);
-                await client.SendAsync().ConfigureAwait(false);
+                await client.AddRequestAsync(request);
+                await client.SendAsync();
 
                 Assert.NotNull(response);
                 Assert.Equal(DicomStatus.Success, response.Status);
@@ -77,8 +78,8 @@ namespace FellowOakDicom.Tests.Network
                     OnTimeout = (sender, args) => timeout = args
                 };
 
-                await client.AddRequestAsync(request).ConfigureAwait(false);
-                await client.SendAsync().ConfigureAwait(false);
+                await client.AddRequestAsync(request);
+                await client.SendAsync();
 
                 Assert.Collection(
                     responses,

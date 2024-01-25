@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Threading.Tasks;
 using FellowOakDicom.Network;
@@ -10,8 +11,8 @@ using Xunit.Abstractions;
 
 namespace FellowOakDicom.Tests.Network
 {
-    [Collection("Network")]
-    [Trait("Category", "Network")]
+    [Collection(TestCollections.Network)]
+    [Trait(TestTraits.Category, TestCategories.Network)]
     public class DicomCEchoProviderTest
     {
         private readonly ITestOutputHelper _output;
@@ -33,10 +34,10 @@ namespace FellowOakDicom.Tests.Network
 
             for (var i = 0; i < 10; i++)
             {
-                await client.AddRequestAsync(new DicomCEchoRequest()).ConfigureAwait(false);
+                await client.AddRequestAsync(new DicomCEchoRequest());
             }
 
-            await client.SendAsync().ConfigureAwait(false);
+            await client.SendAsync();
 
             Assert.False(client.IsSendRequired);
         }

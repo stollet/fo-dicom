@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using Xunit;
 using System.Text;
@@ -10,7 +11,7 @@ using FellowOakDicom.IO.Buffer;
 namespace FellowOakDicom.Tests
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class DicomAnonymizerTest
     {
         #region Unit tests
@@ -156,7 +157,7 @@ namespace FellowOakDicom.Tests
             Assert.True(dataset.Contains(tag));
 
             var sequence = dataset.GetSequence(tag);
-            Assert.Equal(0, sequence.Items.Count);
+            Assert.Empty(sequence.Items);
         }
 
         [Fact]

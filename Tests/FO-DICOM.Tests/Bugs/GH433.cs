@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Threading.Tasks;
 using FellowOakDicom.Network;
@@ -11,7 +12,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.Bugs
 {
 
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class GH433
     {
 
@@ -37,8 +38,8 @@ namespace FellowOakDicom.Tests.Bugs
                                 {
                                     lock (locker) actual = rsp.Status;
                                 }
-                        }).ConfigureAwait(false);
-                await client.SendAsync().ConfigureAwait(false);
+                        });
+                await client.SendAsync();
 
                 Assert.Equal(expected, actual);
             }
@@ -62,11 +63,11 @@ namespace FellowOakDicom.Tests.Bugs
                         {
                             lock (locker) status = rsp.Status;
                         }
-                    }).ConfigureAwait(false);
+                    });
 
                 try
                 {
-                    await client.SendAsync().ConfigureAwait(false);
+                    await client.SendAsync();
                 }
                 catch
                 {

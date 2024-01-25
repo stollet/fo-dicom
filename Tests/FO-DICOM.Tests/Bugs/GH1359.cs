@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.Collections.Concurrent;
@@ -23,7 +24,7 @@ using Xunit.Abstractions;
 
 namespace FellowOakDicom.Tests.Bugs
 {
-    [Collection("Network")]
+    [Collection(TestCollections.Network)]
     public class GH1359
     {
         private readonly XUnitDicomLogger _logger;
@@ -129,10 +130,10 @@ namespace FellowOakDicom.Tests.Bugs
             Exception exception = null;
 
             // Act
-            await client.AddRequestsAsync(requests).ConfigureAwait(false);
+            await client.AddRequestsAsync(requests);
             try
             {
-                await client.SendAsync(CancellationToken.None).ConfigureAwait(false);
+                await client.SendAsync(CancellationToken.None);
             }
             catch (Exception e)
             {

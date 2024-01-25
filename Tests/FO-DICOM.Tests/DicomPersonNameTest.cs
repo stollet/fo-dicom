@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Text;
 using Xunit;
@@ -11,7 +12,7 @@ namespace FellowOakDicom.Tests
     ///This is a test class for DicomPersonNameTest and is intended
     ///to contain all DicomPersonNameTest Unit Tests
     ///</summary>
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class DicomPersonNameTest
     {
         /// <summary>

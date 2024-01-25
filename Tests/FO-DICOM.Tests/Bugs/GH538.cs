@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.Bugs
 {
 
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class GH538
     {
 
@@ -54,8 +55,8 @@ namespace FellowOakDicom.Tests.Bugs
                 };
 
                 var client = DicomClientFactory.Create("localhost", port, false, "STORESCU", "STORESCP");
-                await client.AddRequestAsync(request1).ConfigureAwait(false);
-                await client.AddRequestAsync(request2).ConfigureAwait(false);
+                await client.AddRequestAsync(request1);
+                await client.AddRequestAsync(request2);
 
                 await client.SendAsync();
                 handle1.Wait(10000);
@@ -91,9 +92,9 @@ namespace FellowOakDicom.Tests.Bugs
                 };
 
                 var client = DicomClientFactory.Create("localhost", port, false, "STORESCU", "STORESCP");
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
-                await client.SendAsync().ConfigureAwait(false);
+                await client.SendAsync();
                 handle.Wait(10000);
 
                 Assert.True(success);

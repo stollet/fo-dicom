@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Imaging;
 using FellowOakDicom.Imaging.Codec;
@@ -93,17 +94,27 @@ namespace FellowOakDicom
             services.TryAddSingleton<DicomServiceDependencies>();
             services.TryAddSingleton<IDicomClientFactory, DefaultDicomClientFactory>();
             services.TryAddSingleton<IAdvancedDicomClientConnectionFactory, DefaultAdvancedDicomClientConnectionFactory>();
-            services.Configure(options ?? (o => { }));
+            services.AddOptions<DicomClientOptions>();
+            services.AddOptions<DicomServiceOptions>();
+            if (options != null)
+            {
+                services.Configure(options);
+            }
             return services;
         }
 
-        public static IServiceCollection AddDicomServer(this IServiceCollection services, Action<DicomServiceOptions> options = null)
+        public static IServiceCollection AddDicomServer(this IServiceCollection services, Action<DicomServerOptions> options = null)
         {
             services.TryAddSingleton<DicomServiceDependencies>();
             services.TryAddSingleton<DicomServerDependencies>();
             services.TryAddSingleton<IDicomServerRegistry, DefaultDicomServerRegistry>();
             services.TryAddSingleton<IDicomServerFactory, DefaultDicomServerFactory>();
-            services.Configure(options ?? (o => { }));
+            services.AddOptions<DicomServerOptions>();
+            services.AddOptions<DicomServiceOptions>();
+            if (options != null)
+            {
+                services.Configure(options);
+            }
             return services;
         }
 

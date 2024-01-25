@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network.Tls;
 using System;
@@ -41,7 +42,18 @@ namespace FellowOakDicom.Network
             RemoteHost = options.Host;
             RemotePort = options.Port;
 
-            _tcpClient = new TcpClient { NoDelay = options.NoDelay };
+            _tcpClient = new TcpClient
+            {
+                NoDelay = options.NoDelay
+            };
+            if (options.ReceiveBufferSize.HasValue)
+            {
+                _tcpClient.ReceiveBufferSize = options.ReceiveBufferSize.Value;
+            }
+            if (options.SendBufferSize.HasValue)
+            {
+                _tcpClient.SendBufferSize = options.SendBufferSize.Value;
+            }
             _tcpClient.ConnectAsync(options.Host, options.Port).Wait();
 
             Stream stream = _tcpClient.GetStream();

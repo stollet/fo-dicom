@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Threading.Tasks;
 using FellowOakDicom.Network;
@@ -9,7 +10,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.Network
 {
 
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class DicomServiceTest
     {
 
@@ -51,9 +52,9 @@ namespace FellowOakDicom.Tests.Network
             };
 
             var client = DicomClientFactory.Create("127.0.0.1", port, false, "SCU", "ANY-SCP");
-            await client.AddRequestAsync(request).ConfigureAwait(false);
+            await client.AddRequestAsync(request);
 
-            await client.SendAsync().ConfigureAwait(false);
+            await client.SendAsync();
 
             Assert.Equal((ushort)1, command.GetSingleValue<ushort>(DicomTag.CommandField));
 
@@ -82,9 +83,9 @@ namespace FellowOakDicom.Tests.Network
             };
 
             var client = DicomClientFactory.Create("127.0.0.1", port, false, "SCU", "ANY-SCP");
-            await client.AddRequestAsync(request).ConfigureAwait(false);
+            await client.AddRequestAsync(request);
 
-            await client.SendAsync().ConfigureAwait(false);
+            await client.SendAsync();
 
             var commandField = command.GetSingleValue<ushort>(DicomTag.CommandField);
             Assert.Equal((ushort)1, commandField);

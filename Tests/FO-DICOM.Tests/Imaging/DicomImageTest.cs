@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Threading.Tasks;
 using FellowOakDicom.Imaging;
@@ -7,7 +8,7 @@ using Xunit;
 
 namespace FellowOakDicom.Tests.Imaging
 {
-    [Collection("Imaging")]
+    [Collection(TestCollections.Imaging)]
     public class DicomImageTest
     {
         #region Fields

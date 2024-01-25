@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.Globalization;
@@ -12,7 +13,7 @@ using Xunit;
 namespace FellowOakDicom.Tests
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class DicomUIDGeneratorTest
     {
         #region Unit tests

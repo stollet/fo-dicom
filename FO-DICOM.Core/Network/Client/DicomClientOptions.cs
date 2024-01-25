@@ -1,5 +1,6 @@
 // Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 namespace FellowOakDicom.Network.Client
 {
@@ -33,7 +34,7 @@ namespace FellowOakDicom.Network.Client
         /// Use <see cref="AssociationRequestTimeoutInMs"/> to configure the timeout 
         /// </summary>
         public int MaximumNumberOfConsecutiveTimedOutAssociationRequests { get; set; } = 3;
-
+        
         public DicomClientOptions Clone() =>
             new DicomClientOptions
             {

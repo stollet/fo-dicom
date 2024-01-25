@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network.Tls;
 using Microsoft.Extensions.Logging;
@@ -29,9 +30,11 @@ namespace FellowOakDicom.Network
         /// </summary>
         /// <param name="tlsAcceptor">Handler to accept authenticated connections.</param>
         /// <param name="noDelay">No delay?</param>
+        /// <param name="receiveBufferSize">The size of the receive buffer of the underlying TCP connection</param>
+        /// <param name="sendBufferSize">The size of the send buffer of the underlying TCP connection</param>
         /// <param name="logger">The logger</param>
         /// <param name="token">Cancellation token.</param>
         /// <returns>Connected network stream.</returns>
-        Task<INetworkStream> AcceptNetworkStreamAsync(ITlsAcceptor tlsAcceptor, bool noDelay, ILogger logger, CancellationToken token);
+        Task<INetworkStream> AcceptNetworkStreamAsync(ITlsAcceptor tlsAcceptor, bool noDelay, int? receiveBufferSize, int? sendBufferSize, ILogger logger, CancellationToken token);
     }
 }

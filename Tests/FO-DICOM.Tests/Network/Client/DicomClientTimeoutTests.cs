@@ -1,5 +1,6 @@
 // Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network;
 using FellowOakDicom.Network.Client;
@@ -24,7 +25,7 @@ using Xunit.Abstractions;
 namespace FellowOakDicom.Tests.Network.Client
 {
 
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class DicomClientTimeoutTest
     {
         #region Fields
@@ -109,13 +110,13 @@ namespace FellowOakDicom.Tests.Network.Client
                 RequestTimedOutEventArgs eventArgsFromDicomClientRequestTimedOut = null;
                 client.RequestTimedOut += (sender, args) => eventArgsFromDicomClientRequestTimedOut = args;
 
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
                 var sendTask = client.SendAsync();
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromSeconds(10), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -148,13 +149,13 @@ namespace FellowOakDicom.Tests.Network.Client
                 RequestTimedOutEventArgs eventArgsFromDicomClientRequestTimedOut = null;
                 client.RequestTimedOut += (sender, args) => eventArgsFromDicomClientRequestTimedOut = args;
 
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
                 var sendTask = client.SendAsync();
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromSeconds(10), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -190,13 +191,13 @@ namespace FellowOakDicom.Tests.Network.Client
                 DicomRequest.OnTimeoutEventArgs onTimeoutEventArgs = null;
                 request.OnTimeout += (sender, args) => onTimeoutEventArgs = args;
 
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
                 var sendTask = client.SendAsync();
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromSeconds(10), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -227,13 +228,13 @@ namespace FellowOakDicom.Tests.Network.Client
                 DicomRequest.OnTimeoutEventArgs onTimeoutEventArgs = null;
                 request.OnTimeout += (sender, args) => onTimeoutEventArgs = args;
 
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
                 var sendTask = client.SendAsync();
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromSeconds(10), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -268,13 +269,13 @@ namespace FellowOakDicom.Tests.Network.Client
                 RequestTimedOutEventArgs eventArgsFromDicomClientRequestTimedOut = null;
                 client.RequestTimedOut += (sender, args) => eventArgsFromDicomClientRequestTimedOut = args;
 
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
                 var sendTask = client.SendAsync();
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromSeconds(10), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -304,13 +305,13 @@ namespace FellowOakDicom.Tests.Network.Client
                 RequestTimedOutEventArgs eventArgsFromDicomClientRequestTimedOut = null;
                 client.RequestTimedOut += (sender, args) => eventArgsFromDicomClientRequestTimedOut = args;
 
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
                 var sendTask = client.SendAsync();
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromSeconds(10), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -344,13 +345,13 @@ namespace FellowOakDicom.Tests.Network.Client
                 {
                     OnResponseReceived = (req, res) => response = res,
                 };
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
                 var sendTask = client.SendAsync();
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromSeconds(10), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -389,13 +390,13 @@ namespace FellowOakDicom.Tests.Network.Client
 
                 RequestTimedOutEventArgs eventArgsFromDicomClientRequestTimedOut = null;
                 client.RequestTimedOut += (sender, args) => eventArgsFromDicomClientRequestTimedOut = args;
-                await client.AddRequestAsync(request).ConfigureAwait(false);
+                await client.AddRequestAsync(request);
 
                 var sendTask = client.SendAsync();
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromSeconds(20), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -442,7 +443,7 @@ namespace FellowOakDicom.Tests.Network.Client
                     var request = new DicomCFindRequest(DicomQueryRetrieveLevel.Study);
 
                     requests.Add(request);
-                    await client.AddRequestAsync(request).ConfigureAwait(false);
+                    await client.AddRequestAsync(request);
 
                     if (i < options.Requests)
                     {
@@ -459,7 +460,7 @@ namespace FellowOakDicom.Tests.Network.Client
                 var sendTimeoutCancellationTokenSource = new CancellationTokenSource();
                 var sendTimeout = Task.Delay(TimeSpan.FromMinutes(1), sendTimeoutCancellationTokenSource.Token);
 
-                var winner = await Task.WhenAny(sendTask, sendTimeout).ConfigureAwait(false);
+                var winner = await Task.WhenAny(sendTask, sendTimeout);
 
                 sendTimeoutCancellationTokenSource.Cancel();
                 sendTimeoutCancellationTokenSource.Dispose();
@@ -516,14 +517,14 @@ namespace FellowOakDicom.Tests.Network.Client
                     OnTimeout = (sender, args) => timeout3 = args
                 };
 
-                await client.AddRequestsAsync(new[] { request1, request2, request3 }).ConfigureAwait(false);
+                await client.AddRequestsAsync(new[] { request1, request2, request3 });
 
                 using var cancellation = new CancellationTokenSource(TimeSpan.FromMinutes(1));
 
                 Exception exception = null;
                 try
                 {
-                    await client.SendAsync(cancellation.Token, DicomClientCancellationMode.ImmediatelyAbortAssociation).ConfigureAwait(false);
+                    await client.SendAsync(cancellation.Token, DicomClientCancellationMode.ImmediatelyAbortAssociation);
                 }
                 catch (Exception e)
                 {
@@ -589,14 +590,14 @@ namespace FellowOakDicom.Tests.Network.Client
                     OnTimeout = (sender, args) => timeout3 = args
                 };
 
-                await client.AddRequestsAsync(new[] { request1, request2, request3 }).ConfigureAwait(false);
+                await client.AddRequestsAsync(new[] { request1, request2, request3 });
 
                 using var cancellation = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
                 Exception exception = null;
                 try
                 {
-                    await client.SendAsync(cancellation.Token, DicomClientCancellationMode.ImmediatelyAbortAssociation).ConfigureAwait(false);
+                    await client.SendAsync(cancellation.Token, DicomClientCancellationMode.ImmediatelyAbortAssociation);
                 }
                 catch (Exception e)
                 {
@@ -637,12 +638,12 @@ namespace FellowOakDicom.Tests.Network.Client
                 {
                     eventFired++;
                 };
-                await client.AddRequestAsync(new DicomCEchoRequest()).ConfigureAwait(false);
+                await client.AddRequestAsync(new DicomCEchoRequest());
 
                 Exception exception = null;
                 try
                 {
-                    await client.SendAsync().ConfigureAwait(false);
+                    await client.SendAsync();
                 }
                 catch (DicomAssociationRequestTimedOutException e)
                 {
@@ -673,7 +674,7 @@ namespace FellowOakDicom.Tests.Network.Client
                     // Ensure that it times out once (2 failed attempts) + once more on the second SendAsync
                     if (currentAssociationRequest <= maxRetryCount + 1)
                     {
-                        await Task.Delay(5_000).ConfigureAwait(false);
+                        await Task.Delay(5_000);
                     }
 
                     return true;
@@ -691,8 +692,8 @@ namespace FellowOakDicom.Tests.Network.Client
                 Exception exception1 = null;
                 try
                 {
-                    await client.AddRequestAsync(new DicomCEchoRequest()).ConfigureAwait(false);
-                    await client.SendAsync().ConfigureAwait(false);
+                    await client.AddRequestAsync(new DicomCEchoRequest());
+                    await client.SendAsync();
                 }
                 catch (DicomAssociationRequestTimedOutException e)
                 {
@@ -704,8 +705,8 @@ namespace FellowOakDicom.Tests.Network.Client
                 Exception exception2 = null;
                 try
                 {
-                    await client.AddRequestAsync(new DicomCEchoRequest()).ConfigureAwait(false);
-                    await client.SendAsync().ConfigureAwait(false);
+                    await client.AddRequestAsync(new DicomCEchoRequest());
+                    await client.SendAsync();
                 }
                 catch (DicomAssociationRequestTimedOutException e)
                 {
@@ -736,7 +737,7 @@ namespace FellowOakDicom.Tests.Network.Client
                     // Ensure that it times out once (2 failed attempts) + once more on the second SendAsync
                     if (currentAssociationRequest <= maxRetryCount + 1)
                     {
-                        await Task.Delay(5_000).ConfigureAwait(false);
+                        await Task.Delay(5_000);
                     }
 
                     return false;
@@ -755,8 +756,8 @@ namespace FellowOakDicom.Tests.Network.Client
                 Exception rejectException1 = null;
                 try
                 {
-                    await client.AddRequestAsync(new DicomCEchoRequest()).ConfigureAwait(false);
-                    await client.SendAsync().ConfigureAwait(false);
+                    await client.AddRequestAsync(new DicomCEchoRequest());
+                    await client.SendAsync();
                 }
                 catch (DicomAssociationRejectedException e)
                 {
@@ -773,8 +774,8 @@ namespace FellowOakDicom.Tests.Network.Client
                 Exception rejectException2 = null;
                 try
                 {
-                    await client.AddRequestAsync(new DicomCEchoRequest()).ConfigureAwait(false);
-                    await client.SendAsync().ConfigureAwait(false);
+                    await client.AddRequestAsync(new DicomCEchoRequest());
+                    await client.SendAsync();
                 }
                 catch (DicomAssociationRejectedException e)
                 {
@@ -1106,25 +1107,29 @@ namespace FellowOakDicom.Tests.Network.Client
 
             public async IAsyncEnumerable<DicomCFindResponse> OnCFindRequestAsync(DicomCFindRequest request)
             {
-                await Task.Delay(1000);
+                await Task.Delay(400);
                 yield return new DicomCFindResponse(request, DicomStatus.Pending);
-                await Task.Delay(1000);
+                await Task.Delay(400);
                 yield return new DicomCFindResponse(request, DicomStatus.Pending);
-                await Task.Delay(1000);
+                await Task.Delay(400);
                 yield return new DicomCFindResponse(request, DicomStatus.Pending);
-                await Task.Delay(1000);
+                await Task.Delay(400);
+                yield return new DicomCFindResponse(request, DicomStatus.Pending);
+                await Task.Delay(400);
                 yield return new DicomCFindResponse(request, DicomStatus.Success);
             }
 
             public async IAsyncEnumerable<DicomCMoveResponse> OnCMoveRequestAsync(DicomCMoveRequest request)
             {
-                await Task.Delay(1000);
+                await Task.Delay(400);
                 yield return new DicomCMoveResponse(request, DicomStatus.Pending);
-                await Task.Delay(1000);
+                await Task.Delay(400);
                 yield return new DicomCMoveResponse(request, DicomStatus.Pending);
-                await Task.Delay(1000);
+                await Task.Delay(400);
                 yield return new DicomCMoveResponse(request, DicomStatus.Pending);
-                await Task.Delay(1000);
+                await Task.Delay(400);
+                yield return new DicomCMoveResponse(request, DicomStatus.Pending);
+                await Task.Delay(400);
                 yield return new DicomCMoveResponse(request, DicomStatus.Success);
             }
 
@@ -1180,93 +1185,6 @@ namespace FellowOakDicom.Tests.Network.Client
                 yield return new DicomCMoveResponse(request, DicomStatus.Pending);
                 await Task.Delay(Delay);
                 yield return new DicomCMoveResponse(request, DicomStatus.Success);
-            }
-
-        }
-
-        public class ConfigurableDicomCEchoProvider : DicomService, IDicomServiceProvider, IDicomCEchoProvider
-        {
-            private readonly Func<DicomAssociation, Task<bool>> _onAssociationRequest;
-            private readonly Func<DicomCEchoRequest, Task> _onRequest;
-
-            public ConfigurableDicomCEchoProvider(INetworkStream stream, Encoding fallbackEncoding, ILogger log, DicomServiceDependencies dicomServiceDependencies, Func<DicomAssociation, Task<bool>> onAssociationRequest, Func<DicomCEchoRequest, Task> onRequest)
-                : base(stream, fallbackEncoding, log, dicomServiceDependencies)
-            {
-                _onAssociationRequest = onAssociationRequest ?? throw new ArgumentNullException(nameof(onAssociationRequest));
-                _onRequest = onRequest ?? throw new ArgumentNullException(nameof(onRequest));
-            }
-
-            /// <inheritdoc />
-            public async Task OnReceiveAssociationRequestAsync(DicomAssociation association)
-            {
-                var accept = await _onAssociationRequest(association);
-
-                foreach (var pc in association.PresentationContexts)
-                {
-                    pc.SetResult(accept ? DicomPresentationContextResult.Accept : DicomPresentationContextResult.RejectNoReason);
-                }
-
-                if (accept)
-                {
-                    await SendAssociationAcceptAsync(association).ConfigureAwait(false);
-                }
-                else
-                {
-                    await SendAssociationRejectAsync(DicomRejectResult.Transient, DicomRejectSource.ServiceUser, DicomRejectReason.NoReasonGiven).ConfigureAwait(false);
-                }
-            }
-
-            /// <inheritdoc />
-            public async Task OnReceiveAssociationReleaseRequestAsync()
-            {
-                await SendAssociationReleaseResponseAsync().ConfigureAwait(false);
-            }
-
-            /// <inheritdoc />
-            public void OnReceiveAbort(DicomAbortSource source, DicomAbortReason reason)
-            {
-            }
-
-            /// <inheritdoc />
-            public void OnConnectionClosed(Exception exception)
-            {
-            }
-
-            public async Task<DicomCEchoResponse> OnCEchoRequestAsync(DicomCEchoRequest request)
-            {
-                await _onRequest(request);
-                return new DicomCEchoResponse(request, DicomStatus.Success);
-            }
-        }
-
-        public class ConfigurableDicomCEchoProviderServer : DicomServer<ConfigurableDicomCEchoProvider>
-        {
-            private readonly DicomServiceDependencies _dicomServiceDependencies;
-            private Func<DicomAssociation, Task<bool>> _onAssociationRequest;
-            private Func<DicomCEchoRequest, Task> _onRequest;
-
-            public ConfigurableDicomCEchoProviderServer(DicomServerDependencies dicomServerDependencies,
-                DicomServiceDependencies dicomServiceDependencies) : base(dicomServerDependencies)
-            {
-                _dicomServiceDependencies = dicomServiceDependencies ?? throw new ArgumentNullException(nameof(dicomServiceDependencies));
-                _onAssociationRequest = _ => Task.FromResult(true);
-                _onRequest = _ => Task.FromResult(0);
-            }
-
-            public void OnAssociationRequest(Func<DicomAssociation, Task<bool>> onAssociationRequest)
-            {
-                _onAssociationRequest = onAssociationRequest;
-            }
-
-            public void OnRequest(Func<DicomCEchoRequest, Task> onRequest)
-            {
-                _onRequest = onRequest;
-            }
-
-            protected sealed override ConfigurableDicomCEchoProvider CreateScp(INetworkStream stream)
-            {
-                var provider = new ConfigurableDicomCEchoProvider(stream, Encoding.UTF8, Logger, _dicomServiceDependencies, _onAssociationRequest, _onRequest);
-                return provider;
             }
         }
 

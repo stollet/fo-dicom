@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.IO.Buffer;
 using System;
@@ -12,7 +13,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.IO.Buffer
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class TempFileBufferTest
     {
         #region Unit tests
@@ -78,7 +79,7 @@ namespace FellowOakDicom.Tests.IO.Buffer
             using var ms = new MemoryStream(bytes.Length);
 
             // Act
-            await fileByteBuffer.CopyToStreamAsync(ms, CancellationToken.None).ConfigureAwait(false);
+            await fileByteBuffer.CopyToStreamAsync(ms, CancellationToken.None);
 
             // Assert
             Assert.Equal(bytes, ms.ToArray());

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network;
 using System;
@@ -14,7 +15,7 @@ using Microsoft.Extensions.Logging;
 namespace FellowOakDicom.Tests.Bugs
 {
 
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     internal class VideoCStoreProvider : DicomService, IDicomServiceProvider, IDicomCStoreProvider
     {
         private readonly List<string> _storedFiles = new List<string>();

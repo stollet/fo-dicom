@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,10 @@ namespace FellowOakDicom.Tests
     public class CollectingLogger : ILogger
     {
         private readonly IList<(LogLevel, string)> _logEntries = new List<(LogLevel, string)>();
+
         private bool _collecting;
+
+        public IList<(LogLevel, string)> LogEntries => _logEntries;
 
         /// <summary>
         /// Clear the collected log entries.
@@ -48,7 +52,7 @@ namespace FellowOakDicom.Tests
         /// </summary>
         public string WarningAt(int index) => LogMessageAt(index, LogLevel.Warning);
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
             if (_collecting)
             {

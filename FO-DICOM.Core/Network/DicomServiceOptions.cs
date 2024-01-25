@@ -1,10 +1,14 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 
 namespace FellowOakDicom.Network
 {
+    /// <summary>
+    /// Configures a DICOM service (an instance of an active DICOM connection)
+    /// </summary>
     public class DicomServiceOptions
     {
         /// <summary>
@@ -27,18 +31,29 @@ namespace FellowOakDicom.Network
 
         /// <summary>Gets or sets maximum buffer length for data PDVs when generating P-Data-TF PDUs.</summary>
         public uint MaxDataBuffer { get; set; } = 1 * 1024 * 1024; //1MB
-
-        /// <summary>Gets or sets whether to enable (true) or disable (false) TCP Nagle algorithm.</summary>
+        
+        /// <summary>
+        /// Gets or sets whether to enable (true) or disable (false) TCP Nagle algorithm on incoming TCP connections
+        /// </summary>
         public bool TcpNoDelay { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the size of the receive buffer of the underlying TCP connection
+        /// If not configured, the default value of 8192 bytes will be used
+        /// </summary>
+        /// <seealso cref="System.Net.Sockets.TcpClient.ReceiveBufferSize"/>
+        public int? TcpReceiveBufferSize { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size of the send buffer of the underlying TCP connection
+        /// If not configured, the default value of 8192 bytes will be used
+        /// </summary>
+        /// <seealso cref="System.Net.Sockets.TcpClient.SendBufferSize"/>
+        public int? TcpSendBufferSize { get; set; }
 
         /// <summary>Gets or sets the maximum number of PDVs per PDU, or unlimited if set to zero.
         /// Setting this to 1 can work around common bugs in other implementations.</summary>
         public int MaxPDVsPerPDU { get; set; } = 0;
-
-        /// <summary>
-        /// Gets or sets the maximum number of clients allowed for a specific server. Unlimited if set to zero.
-        /// </summary>
-        public int MaxClientsAllowed { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets whether to ignore transfer syntax change when DICOM dataset cannot be transcoded from
@@ -66,12 +81,13 @@ namespace FellowOakDicom.Network
                 UseRemoteAEForLogName = UseRemoteAEForLogName,
                 MaxCommandBuffer = MaxCommandBuffer,
                 MaxDataBuffer = MaxDataBuffer,
-                TcpNoDelay = TcpNoDelay,
                 RequestTimeout = RequestTimeout,
-                MaxClientsAllowed = MaxClientsAllowed,
                 IgnoreUnsupportedTransferSyntaxChange = IgnoreUnsupportedTransferSyntaxChange,
                 MaxPDULength = MaxPDULength,
-                MaxPDVsPerPDU = MaxPDVsPerPDU
+                MaxPDVsPerPDU = MaxPDVsPerPDU,
+                TcpNoDelay = TcpNoDelay,
+                TcpReceiveBufferSize = TcpReceiveBufferSize,
+                TcpSendBufferSize = TcpSendBufferSize
             };
     }
 }

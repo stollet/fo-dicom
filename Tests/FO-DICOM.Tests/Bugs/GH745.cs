@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Linq;
 using System.Threading;
@@ -14,7 +15,7 @@ using Xunit.Abstractions;
 
 namespace FellowOakDicom.Tests.Bugs
 {
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class GH745
     {
         private readonly XUnitDicomLogger _logger;
@@ -62,9 +63,9 @@ namespace FellowOakDicom.Tests.Bugs
                         },
                         UserState = i
                     }
-                ).ConfigureAwait(false);
+                );
                 testLogger.LogInformation("Sending #{0}", i);
-                await client.SendAsync().ConfigureAwait(false);
+                await client.SendAsync();
                 testLogger.LogInformation("Sent (or timed out) #{0}", i);
             }
 
@@ -106,15 +107,15 @@ namespace FellowOakDicom.Tests.Bugs
                                 Interlocked.Increment(ref actual);
                             }
                         }
-                    ).ConfigureAwait(false);
+                    );
 
                     testLogger.LogInformation("Sending #{0}", requestIndex);
-                    await client.SendAsync().ConfigureAwait(false);
+                    await client.SendAsync();
                     testLogger.LogInformation("Sent (or timed out) #{0}", requestIndex);
                 }
             ).ToArray();
 
-            await Task.WhenAll(requests).ConfigureAwait(false);
+            await Task.WhenAll(requests);
 
             Assert.Equal(expected, actual);
         }

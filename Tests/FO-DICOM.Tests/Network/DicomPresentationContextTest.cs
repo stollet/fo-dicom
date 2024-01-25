@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.Network
 {
 
-    [Collection("Network")]
+    [Collection(TestCollections.Network)]
     public class DicomPresentationContextTest
     {
         #region Unit Tests
@@ -98,6 +99,7 @@ namespace FellowOakDicom.Tests.Network
         {
             new object[] { DicomPresentationContextResult.Accept, DicomTransferSyntax.DeflatedExplicitVRLittleEndian },
            new object[] { DicomPresentationContextResult.Accept, DicomTransferSyntax.JPEG2000Lossless },
+           new object[] { DicomPresentationContextResult.Accept, DicomTransferSyntax.HTJ2KLossless },
            new object[] { DicomPresentationContextResult.RejectAbstractSyntaxNotSupported, DicomTransferSyntax.ExplicitVRLittleEndian },
            new object[] { DicomPresentationContextResult.RejectNoReason, null },
            new object[] { DicomPresentationContextResult.RejectTransferSyntaxesNotSupported, null },

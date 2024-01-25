@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.Linq;
@@ -566,15 +567,23 @@ namespace FellowOakDicom.Imaging
 
                 IByteBuffer buffer;
 
+                var fragments = _element.Fragments;
+                
+                // GH-1586 Ignore last fragment if it is empty
+                if (fragments.Count > 0 && fragments[fragments.Count - 1].Size == 0)
+                {
+                    fragments.RemoveAt(fragments.Count - 1);
+                }
+                
                 if (NumberOfFrames == 1)
                 {
-                    buffer = _element.Fragments.Count == 1
-                        ? _element.Fragments[0]
-                        : new CompositeByteBuffer(_element.Fragments);
+                    buffer = fragments.Count == 1
+                        ? fragments[0]
+                        : new CompositeByteBuffer(fragments);
                 }
-                else if (_element.Fragments.Count == NumberOfFrames)
+                else if (fragments.Count == NumberOfFrames)
                 {
-                    buffer = _element.Fragments[frame];
+                    buffer = fragments[frame];
                 }
                 else if (_element.OffsetTable.Count == NumberOfFrames)
                 {
@@ -588,10 +597,10 @@ namespace FellowOakDicom.Imaging
                     long pos = 0;
                     var frag = 0;
 
-                    while (pos < start && frag < _element.Fragments.Count)
+                    while (pos < start && frag < fragments.Count)
                     {
                         pos += 8;
-                        pos += _element.Fragments[frag].Size;
+                        pos += fragments[frag].Size;
                         frag++;
                     }
 
@@ -600,12 +609,12 @@ namespace FellowOakDicom.Imaging
                         throw new DicomImagingException("Fragment start position does not match offset table.");
                     }
 
-                    while (pos < stop && frag < _element.Fragments.Count)
+                    while (pos < stop && frag < fragments.Count)
                     {
-                        composite.Buffers.Add(_element.Fragments[frag]);
+                        composite.Buffers.Add(fragments[frag]);
 
                         pos += 8;
-                        pos += _element.Fragments[frag].Size;
+                        pos += fragments[frag].Size;
                         frag++;
                     }
 

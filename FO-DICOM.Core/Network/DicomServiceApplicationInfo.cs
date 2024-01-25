@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.Collections;
@@ -196,7 +197,7 @@ namespace FellowOakDicom.Network
         /// <param name="index">Application info field index.</param>
         /// <param name="defaultValue">Default value if Application info field index does not exist.</param>
         /// <returns>Application info field value or <paramref name="defaultValue"/> if not exists.</returns>
-        /// <exception cref="System.ArgumentException"><paramref name="'T"/> is not an Enum.</exception>
+        /// <exception cref="System.ArgumentException"><paramref name="T"/> is not an Enum.</exception>
         public byte GetValueForEnum<T>(byte index, byte defaultValue)
         {
             if (Contains(index) && Enum.IsDefined(typeof(T), (int)this[index]))

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network;
 using FellowOakDicom.Network.Client;
@@ -16,7 +17,7 @@ using Xunit.Abstractions;
 
 namespace FellowOakDicom.Tests.Network
 {
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class DicomUserIdentityNegotiationTest
     {
         #region Fields
@@ -712,7 +713,7 @@ namespace FellowOakDicom.Tests.Network
             try
             {
                 using var association = await connection.OpenAssociationAsync(openAssociationRequest, CancellationToken.None);
-                var cEchoResponse = await association.SendCEchoRequestAsync(cEchoRequest, CancellationToken.None).ConfigureAwait(false);
+                var cEchoResponse = await association.SendCEchoRequestAsync(cEchoRequest, CancellationToken.None);
                 await association.ReleaseAsync(CancellationToken.None);
 
                 Assert.NotNull(cEchoResponse);

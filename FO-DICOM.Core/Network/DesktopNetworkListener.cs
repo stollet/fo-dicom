@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network.Tls;
 using Microsoft.Extensions.Logging;
@@ -63,6 +64,8 @@ namespace FellowOakDicom.Network
         public async Task<INetworkStream> AcceptNetworkStreamAsync(
             ITlsAcceptor tlsAcceptor,
             bool noDelay,
+            int? receiveBufferSize,
+            int? sendBufferSize,
             ILogger logger,
             CancellationToken token)
         {
@@ -82,6 +85,14 @@ namespace FellowOakDicom.Network
                 {
                     var tcpClient = await acceptTcpClientTask;
                     tcpClient.NoDelay = noDelay;
+                    if (receiveBufferSize.HasValue)
+                    {
+                        tcpClient.ReceiveBufferSize = receiveBufferSize.Value;
+                    }
+                    if (sendBufferSize.HasValue)
+                    {
+                        tcpClient.SendBufferSize = sendBufferSize.Value;
+                    }
                     
                     if (logger.IsEnabled(LogLevel.Debug))
                     {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network;
 using System;
@@ -28,6 +29,7 @@ namespace FellowOakDicom.Tests.Network
             // Lossless
             DicomTransferSyntax.JPEGLSLossless,
             DicomTransferSyntax.JPEG2000Lossless,
+            DicomTransferSyntax.HTJ2KLossless,
             DicomTransferSyntax.JPEGProcess14SV1,
             DicomTransferSyntax.JPEGProcess14,
             DicomTransferSyntax.RLELossless,

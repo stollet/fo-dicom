@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System;
 using System.IO;
@@ -12,7 +13,7 @@ using Xunit;
 
 namespace FellowOakDicom.Tests.IO.Buffer
 {
-    [Collection("General")]
+    [Collection(TestCollections.General)]
     public class EndianByteBufferTest
     {
         private readonly Endian _otherEndian;
@@ -160,7 +161,7 @@ namespace FellowOakDicom.Tests.IO.Buffer
             using var ms = new MemoryStream(length);
 
             // Act
-            await buffer.CopyToStreamAsync(ms, CancellationToken.None).ConfigureAwait(false);
+            await buffer.CopyToStreamAsync(ms, CancellationToken.None);
             var actual = ms.ToArray();
 
             // Assert

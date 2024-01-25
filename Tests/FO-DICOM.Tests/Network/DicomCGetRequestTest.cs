@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using System.Collections.Generic;
 using System.Threading;
@@ -11,7 +12,7 @@ using Xunit;
 namespace FellowOakDicom.Tests.Network
 {
 
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class DicomCGetRequestTest : IClassFixture<GlobalFixture>
     {
 
@@ -46,7 +47,7 @@ namespace FellowOakDicom.Tests.Network
                 handle.Set();
             };
             await client.AddRequestAsync(get);
-            await client.SendAsync().ConfigureAwait(false);
+            await client.SendAsync();
             handle.Wait();
 
             Assert.Equal("RT ANKLE", dataset.GetString(DicomTag.StudyDescription));
@@ -84,7 +85,7 @@ namespace FellowOakDicom.Tests.Network
                 }
             };
             await client.AddRequestAsync(get);
-            await client.SendAsync().ConfigureAwait(false);
+            await client.SendAsync();
             handle.Wait();
 
             Assert.Equal(140, counter);

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2012-2023 fo-dicom contributors.
 // Licensed under the Microsoft Public License (MS-PL).
+#nullable disable
 
 using FellowOakDicom.Network;
 using FellowOakDicom.Network.Client;
@@ -18,17 +19,12 @@ using static FellowOakDicom.Tests.Network.Client.DicomClientTest;
 
 namespace FellowOakDicom.Tests.Network.Client
 {
-    [Collection("Network"), Trait("Category", "Network")]
+    [Collection(TestCollections.Network), Trait(TestTraits.Category, TestCategories.Network)]
     public class DicomClientTlsTest
     {
-        private readonly ITestOutputHelper _testOutputHelper;
-        private readonly XUnitDicomLogger _logger;
-
         #region Fields
 
-        private static string _remoteHost;
-
-        private static int _remotePort;
+        private readonly XUnitDicomLogger _logger;
 
         #endregion
 
@@ -36,13 +32,10 @@ namespace FellowOakDicom.Tests.Network.Client
 
         public DicomClientTlsTest(ITestOutputHelper testOutputHelper)
         {
-            _testOutputHelper = testOutputHelper;
             _logger = new XUnitDicomLogger(testOutputHelper)
                 .IncludeTimestamps()
                 .IncludeThreadId()
                 .WithMinimumLevel(LogLevel.Debug);
-            _remoteHost = null;
-            _remotePort = 0;
         }
 
         #endregion
@@ -85,7 +78,6 @@ namespace FellowOakDicom.Tests.Network.Client
         }
 
         #endregion
-
 
         [Theory]
 #if !NET462
@@ -197,11 +189,11 @@ namespace FellowOakDicom.Tests.Network.Client
                     actualResponse = response;
                 }
             };
-            await client.AddRequestAsync(dicomCEchoRequest).ConfigureAwait(false);
+            await client.AddRequestAsync(dicomCEchoRequest);
 
             using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60)))
             {
-                await client.SendAsync(cts.Token).ConfigureAwait(false);
+                await client.SendAsync(cts.Token);
             }
 
             AllResponsesShouldHaveSucceeded(new[] { actualResponse });
