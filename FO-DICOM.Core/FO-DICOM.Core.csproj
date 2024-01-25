@@ -14,13 +14,12 @@
     <PackageProjectUrl>https://github.com/fo-dicom/fo-dicom</PackageProjectUrl>
     <Description>A NetStandard DICOM library.
 If you find some breaking changes when updating, read here for more information how to migrate: https://github.com/fo-dicom/fo-dicom/wiki/Upgrade-from-version-4-to-version-5</Description>
-    <Version>5.1.1.1-HMS</Version>
-    <Version>5.1.2</Version>
+    <Version>5.1.2.1-HMS</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>fo-dicom</PackageId>
     <LangVersion>8.0</LangVersion>
     <Platforms>AnyCPU;x64</Platforms>
-    <FileVersion>5.1.1.1</FileVersion>
+    <FileVersion>5.1.2.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
